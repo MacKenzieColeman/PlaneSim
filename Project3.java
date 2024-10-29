@@ -69,9 +69,9 @@ public class Project3 {
     System.out.println("= = = = Final Summary = = = =");
     System.out.println("Time Simulated: "+maxTime);
     System.out.println("Number of total planes: "+ numPlanes);
-    System.out.println("\t Planes Arrived: "); //COUNT NUMBER OF PLANES THAT ARRIVED
-    System.out.println("\t Planes Departed: "); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
-    System.out.println("\t Planes Turned Away: "); //COUNT NUMBER OF PLANES THAT TURNED AWAY
-    System.out.println("Average wait time on GROUND: "); //Average wait time 2
+    System.out.println("\t Planes Arrived: " + Runway.getProcessed()); //COUNT NUMBER OF PLANES THAT ARRIVED
+    System.out.println("\t Planes Departed: " + Runway.getDeparted()); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
+    System.out.println("\t Planes Turned Away: " + Runway.getRefused()); //COUNT NUMBER OF PLANES THAT TURNED AWAY
+    System.out.println("Average wait time on GROUND: " + Runway.getWaitTime()); //Average wait time 2
   }
 }
