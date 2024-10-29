@@ -32,8 +32,9 @@ public class Project3 {
     int runwaySize = scan.nextInt();
     Runway runway = new Runway(runwaySize); //create runway
 
-    for(int i = 0; i < numPlanes; i++){ //create planes
+    for(int i = 0; i <= numPlanes; i++){ //create planes
       Plane planes = new Plane(runway, i);
+      runway.newLanding(planes);
     }
 
     int currentTime = 0;
@@ -60,7 +61,8 @@ public class Project3 {
       System.out.println("Current Time: "+currentTime);
       System.out.println("Planes in air: "+ runway.Landing.size());
       System.out.println("Planes at airport: "+ runway.Takeoff.size());
-      System.out.println("Planes Departed: "); //Add number of planes departed
+      System.out.println("Planes Departed: " + runway.getDeparted()); //Add number of planes departed
+      System.out.println("= = = = =\n");
 
       currentTime++;
     }

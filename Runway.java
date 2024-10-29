@@ -30,7 +30,8 @@ public class Runway {
 
     public void newTakeoff(){
         if(Takeoff.size() < maxQueueSize && Landing.size() > 0) {
-          Takeoff.add(Landing.remove()); //should remove the plane from landing, and immediately add it to takeoff
+          Takeoff.add(Landing.peek()); //should remove the plane from landing, and immediately add it to takeoff
+          Landing.remove();
           numProcessed++;
         }
         else {
