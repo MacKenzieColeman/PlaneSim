@@ -15,6 +15,7 @@ public class Runway {
     public int numProcessed;
     public int numRefused;
     public int avgWait;
+    public int numDeparted;
 
     Queue<Plane> Landing = new LinkedList<>(); //planes waiting to land
     Queue<Plane> Takeoff = new LinkedList<>(); //planes waiting to takeoff
@@ -43,6 +44,23 @@ public class Runway {
             System.out.println("Plane: "+plane.getNumber()+" has departed!");
             Takeoff.remove();
             avgWait = avgWait + plane.groundWaitTime;
+            numDeparted++;
         }
+    }
+
+    public int getProcessed(){
+        return numProcessed;
+    }
+
+    public int getDeparted(){
+        return numDeparted;
+    }
+
+    public int getRefused(){
+        return numRefused;
+    }
+
+    public int getWaitTime(){
+        return avgWait;
     }
 }

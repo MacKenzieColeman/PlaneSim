@@ -1,4 +1,4 @@
-//airport with only one runway
+///airport with only one runway
 //at any one unit of time, one plane can take off, one plane can land, but never both at the same time
 //these times are random
 //especially concerned with the amount of time waiting in queues
@@ -69,9 +69,9 @@ public class Project3 {
     System.out.println("= = = = Final Summary = = = =");
     System.out.println("Time Simulated: "+maxTime);
     System.out.println("Number of total planes: "+ numPlanes);
-    System.out.println("\t Planes Arrived: " + Runway.getProcessed()); //COUNT NUMBER OF PLANES THAT ARRIVED
-    System.out.println("\t Planes Departed: " + Runway.getDeparted()); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
-    System.out.println("\t Planes Turned Away: " + Runway.getRefused()); //COUNT NUMBER OF PLANES THAT TURNED AWAY
-    System.out.println("Average wait time on GROUND: " + Runway.getWaitTime()); //Average wait time 2
+    System.out.println("\t Planes Arrived: " + runway.getProcessed()); //COUNT NUMBER OF PLANES THAT ARRIVED
+    System.out.println("\t Planes Departed: " + runway.getDeparted()); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
+    System.out.println("\t Planes Turned Away: " + runway.getRefused()); //COUNT NUMBER OF PLANES THAT TURNED AWAY
+    System.out.println("Average wait time on GROUND: " + runway.getWaitTime()); //Average wait time 2
   }
 }
