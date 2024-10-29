@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * SO: A plane can only take off if landing queue is empty
  * 
  * Keep statistics on: Number of plane sprocessed, 
- * average time spent waiting, number of planes (if any) refused service(???).
+ * average time spent waiting, number of planes refused service(queue is full and cant take anymore planes)
  * 
  */
 
@@ -24,7 +24,14 @@ public class Runway {
     }
 
     public void newTakeoff(){
-        if(Takeoff.size() < maxQueueSize) Takeoff.add(Landing.remove()); //should remove the plane from landing, and immediately add it to takeoff
+        if(Takeoff.size() < maxQueueSize && Landing.size() > 0) Takeoff.add(Landing.remove()); //should remove the plane from landing, and immediately add it to takeoff
         else System.out.println("Full Airport!");
+    }
+
+    public void newLeave(Plane plane){
+        if(Takeoff.size() > 0){
+            System.out.println("Plane: "+plane.getNumber()+" has departed!");
+            Takeoff.remove();
+        }
     }
 }
