@@ -30,10 +30,10 @@ public class Project3 {
 
     System.out.println("\nInsert Max Size of Runway Queues: ");
     int runwaySize = scan.nextInt();
-    Runway runway = new Runway(runwaySize);
+    Runway runway = new Runway(runwaySize); //create runway
 
     for(int i = 0; i < numPlanes; i++){ //create planes
-      Plane plane = new Plane(runway, i);
+      Plane planes = new Plane(runway, i);
     }
 
     int currentTime = 0;
@@ -43,13 +43,35 @@ public class Project3 {
       if(runway.Landing.peek() != null && runway.Takeoff.size() <= runwaySize){
         runway.newTakeoff();
       }
-      if(runway.Takeoff.size() > 0){
+      if(runway.Takeoff.size() > 0){ //Otherwise, take one off
         runway.newLeave(runway.Takeoff.peek());
       }
-      //Otherwise, take one off
+
+      //Runs the Update() method for every plane in the program.
+      //This is what counts their individual statistics.
+      for(Plane plane: runway.Landing){
+        plane.Update();
+      }
+      for(Plane plane: runway.Takeoff){
+        plane.Update();
+      }
+
+      //Quick Summary
+      System.out.println("Current Time: "+currentTime);
+      System.out.println("Planes in air: "+ runway.Landing.size());
+      System.out.println("Planes at airport: "+ runway.Takeoff.size());
+      System.out.println("Planes Departed: "); //Add number of planes departed
 
       currentTime++;
     }
 
+    //Print out report summary
+    System.out.println("= = = = Final Summary = = = =");
+    System.out.println("Time Simulated: "+maxTime);
+    System.out.println("Number of total planes: "+ numPlanes);
+    System.out.println("\t Planes Arrived: "); //COUNT NUMBER OF PLANES THAT ARRIVED
+    System.out.println("\t Planes Departed: "); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
+    System.out.println("\t Planes Turned Away: "); //COUNT NUMBER OF PLANES THAT TURNED AWAY
+    System.out.println("Average wait time on GROUND: "); //Average wait time 2
   }
 }
