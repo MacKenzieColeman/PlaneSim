@@ -32,7 +32,7 @@ public class Project3 {
     int runwaySize = scan.nextInt();
     Runway runway = new Runway(runwaySize); //create runway
 
-    for(int i = 0; i <= numPlanes; i++){ //create planes
+    for(int i = 0; i < numPlanes; i++){ //create planes
       Plane planes = new Plane(runway, i);
       runway.newLanding(planes);
     }
@@ -41,10 +41,10 @@ public class Project3 {
 
     while(currentTime < maxTime){
       //If planes in air, and queue isnt full, land one
-      if(runway.Landing.peek() != null && runway.Takeoff.size() <= runwaySize){
+      if(runway.Landing.peek() != null && runway.Takeoff.size() < runwaySize){
         runway.newTakeoff();
       }
-      if(runway.Takeoff.size() > 0){ //Otherwise, take one off
+      else if(runway.Takeoff.size() > 0){ //Otherwise, take one off
         runway.newLeave(runway.Takeoff.peek());
       }
 
