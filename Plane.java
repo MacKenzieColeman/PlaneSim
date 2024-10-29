@@ -5,7 +5,6 @@ import java.text.NumberFormat;
  * 
  * Variables: Flight number, plane status of either arriving or departing
  * 
- * 
  */
 
 public class Plane {
@@ -13,7 +12,7 @@ public class Plane {
 	public int airWaitTime, groundWaitTime;
     public int flightNumber;
     public Runway currentRunway;
-    public boolean arriving; //arriving is true if arriving (going to or on land), and false if departing (leaving or on land).
+    public boolean arriving; //arriving is true if arriving (going to land), and false if departing (leaving or on land).
 
 	
 	public Plane(Runway runway, int number)
@@ -31,7 +30,6 @@ public class Plane {
     public void Land(){
         arriving = false; //now on land
         currentRunway.newLanding(Plane.this);
-
     }
 
     public void TakeOff(){

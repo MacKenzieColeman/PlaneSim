@@ -15,9 +15,12 @@ import java.util.Scanner;
 
 public class Project3 {
   public static void main(String[] args) {
+
+    //MAKE RANDOM OPTION TO RANDOMIZE SYSTEM
+
     Scanner scan = new Scanner(System.in);
     System.out.println("Insert Number of Time Intervals: ");
-    int timeInterval = scan.nextInt();
+    int maxTime = scan.nextInt();
 
     System.out.println("\nInsert Number of Planes Arriving: ");
     int numPlanes = scan.nextInt();
@@ -32,5 +35,21 @@ public class Project3 {
     for(int i = 0; i < numPlanes; i++){ //create planes
       Plane plane = new Plane(runway, i);
     }
+
+    int currentTime = 0;
+
+    while(currentTime < maxTime){
+      //If planes in air, and queue isnt full, land one
+      if(runway.Landing.peek() != null && runway.Takeoff.size() <= runwaySize){
+        runway.newTakeoff();
+      }
+      if(runway.Takeoff.size() > 0){
+        runway.newLeave(runway.Takeoff.peek());
+      }
+      //Otherwise, take one off
+
+      currentTime++;
+    }
+
   }
 }
