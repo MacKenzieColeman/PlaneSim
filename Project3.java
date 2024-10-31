@@ -17,124 +17,129 @@ import java.util.Random;
 public class Project3 {
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in); //create scanner
-    Random randy = new Random();
+    Random randy = new Random(); //create random
 
+    //Initialize all the int values
     int maxTime = 0;
     int numPlanes = 0;
     int numDeparting = 0;
-    int runwaySize = 0; //Initialize all the int values
+    int runwaySize = 0;
 
-    Runway runway = new Runway(runwaySize); //create runway
+    //create runway
+    Runway runway = new Runway(runwaySize);
 
     //= = = = = = = Introduction + System settings
     System.out.println("\u001B[33mWelcome to the Airport Simulation!\n\u001B[32mWould you like to randomize the settings? (y/n)");
     String input = scan.nextLine().toUpperCase();
-    if(input.equals("Y")){
+    if(input.equals("Y")){ //If YES to randomization:
       maxTime = randy.nextInt(10)+1; //Random amount of time between 1 and 10
       numPlanes = randy.nextInt(8)+1; //Random amount of planes between 1 and 8
       numDeparting = randy.nextInt(3)+1; //Random amount of departing planes between 1 and 3
       runwaySize = randy.nextInt(5)+1; //Random size of runway between 1 and 5
-      runway.changeSize(runwaySize);
+      runway.changeSize(runwaySize); //set the proper runway size
     }
-    else{
-      System.out.println("\u001B[35mInsert Number of Time Intervals: ");
-      while(true) {
+    else{ //If NO to randomization
+      System.out.println("\u001B[35mInsert Number of Time Intervals: "); //Ask input
+      while(true) { //Failsafe for improper input
         if(scan.hasNextInt()) {
           maxTime = scan.nextInt();
           break;
         } else {
-          System.out.println("Please insert a number.");
+          System.out.println("Please insert a number."); //Error
           scan.next();
         }
       }
 
-      System.out.println("\nInsert Number of Planes Arriving: ");
-      while(true) {
+      System.out.println("\nInsert Number of Planes Arriving: "); //Ask num of planes
+      while(true) {//Failsafe for improper input
         if(scan.hasNextInt()) {
           numPlanes = scan.nextInt();
           break;
         } else {
-          System.out.println("Please insert a number.");
+          System.out.println("Please insert a number."); //Error
           scan.next();
         }
       }
 
-      System.out.println("\nInsert Number of Planes Arriving or Departing per Time Interval: ");
-      while(true) {
+      System.out.println("\nInsert Number of Planes Arriving or Departing per Time Interval: "); //Ask for number of planes departing/arriving per unit
+      while(true) { //Failsafe for improper input
         if(scan.hasNextInt()) {
           numDeparting = scan.nextInt();
           break;
         } else {
-          System.out.println("Please insert a number.");
+          System.out.println("Please insert a number."); //Error
           scan.next();
         }
       }
 
-      System.out.println("\nInsert Max Size of Runway Queues: ");
-      while(true) {
+      System.out.println("\nInsert Max Size of Runway: "); //Ask for runway size
+      while(true) { //Failsafe for improper input
         if(scan.hasNextInt()) {
           runwaySize = scan.nextInt();
-          runway.changeSize(runwaySize);
+          runway.changeSize(runwaySize); //sets runway size
           break;
         } else {
-          System.out.println("Please insert a number.");
+          System.out.println("Please insert a number."); //Error
           scan.next();
         }
       }
     }
 
-    for(int i = 0; i < numPlanes; i++){ //create planes
-      Plane planes = new Plane(runway, i);
-      runway.newLanding(planes);
+    //Create the proper amount of planes
+    for(int i = 0; i < numPlanes; i++){
+      Plane planes = new Plane(runway, i); //create the runway, setting the proper runway, and Flight number
+      runway.newLanding(planes); //Add each plane to the runway, starting in the Runway queue
     }
-    int currentTime = 1;
+    int currentTime = 1; //Create current time int, starting at 1 (doesnt make sense to start at time 0)
 
-      //Starting Report!
-      System.out.println("\u001B[34mStarting Report | Max time: "+maxTime);
+      //= = = = = = = = = = = Starting Report! Shows user either what they inputed, or what the program randomized
+      System.out.println("\u001B[34m= = Starting Report = =");
+      System.out.println("Max time: "+maxTime);
+      System.out.println("Planes Arriving / Departing per Time Unit: "+numDeparting);
+      System.out.println("Runway Size: "+runwaySize);
       System.out.println("Planes in air: "+ runway.Landing.size());
       System.out.println("Planes at airport: "+ runway.Takeoff.size());
       System.out.println("Planes Departed: " + runway.getDeparted()); //Add number of planes departed
       System.out.println("= = = = =\n");
 
+      //= = = = = = = = = = = Each unit of time! While there is still time left, continue loop
     while(currentTime <= maxTime){
-      //If planes in air, and queue isnt full, land one
       for(int i = 0; i < numDeparting; i++)
       {
-        if(runway.Landing.peek() != null && runway.Takeoff.size() < runwaySize){
+        if(runway.Landing.peek() != null && runway.Takeoff.size() < runwaySize){ //If theres a plane in landing, and runway isn't full, land a new plane to the runway
           runway.newTakeoff();
         }
-        else if(runway.Takeoff.size() > 0){ //Otherwise, take one off
+        else if(runway.Takeoff.size() > 0){ //Otherwise, as long as theres a plane in the runway, depart a plane
           runway.newLeave(runway.Takeoff.peek());
         }
       }
 
-
       //Runs the Update() method for every plane in the program.
       //This is what counts their individual statistics.
-      for(Plane plane: runway.Landing){
+      for(Plane plane: runway.Landing){ //For each plane in Landing, update
         plane.Update();
       }
-      for(Plane plane: runway.Takeoff){
+      for(Plane plane: runway.Takeoff){ //For each plane in Takeoff, update
         plane.Update();
       }
 
-      //Quick Summary
+      //= = = = = = = = = = = Quick Summary! Shows current information for the airport at each time interval
       System.out.println("\u001B[36mCurrent Time: "+currentTime);
       System.out.println("Planes in air: "+ runway.Landing.size());
       System.out.println("Planes at airport: "+ runway.Takeoff.size());
       System.out.println("Planes Departed: " + runway.getDeparted()); //Add number of planes departed
       System.out.println("= = = = =\n");
 
-      currentTime++;
+      currentTime++; //Increases to the next time, before continuing while loop
     }
 
-    //Print out report summary
+    //Print out report summary.
     System.out.println("\u001B[33m= = = = Final Summary = = = =");
-    System.out.println("\u001B[32mTime Simulated: "+maxTime);
-    System.out.println("Number of total planes: "+ numPlanes);
-    System.out.println("\t Planes Arrived: " + runway.getProcessed()); //COUNT NUMBER OF PLANES THAT ARRIVED
-    System.out.println("\t Planes Departed: " + runway.getDeparted()); //COUNT NUMBER OF PLANES THAT LEFT RUNWAY
-    System.out.println("\t Planes Turned Away: " + runway.getRefused()); //COUNT NUMBER OF PLANES THAT TURNED AWAY
-    System.out.println("Average wait time on GROUND: " + runway.getWaitTime()); //Average wait time 2
+    System.out.println("\u001B[32mTime Simulated: "+maxTime); //Amount of time units simulated
+    System.out.println("Number of total planes: "+ numPlanes); //Amount of planes from start
+    System.out.println("\t Planes Arrived: " + runway.getProcessed()); //Planes that arrived at the airport
+    System.out.println("\t Planes Departed: " + runway.getDeparted()); //Planes that left the runway, and departed
+    System.out.println("\t Planes Turned Away: " + runway.getRefused()); //Number of planes turned away because of a full airport
+    System.out.println("Average wait time on GROUND: " + runway.getWaitTime()); //Average wait time on airport
   }
 }
