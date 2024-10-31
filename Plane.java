@@ -1,4 +1,3 @@
-import java.text.NumberFormat;
 
 /*
  * Methods: Initialization, takeoff, landing.

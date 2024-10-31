@@ -9,8 +9,6 @@
 //of planes arriving, the expected number of planes departing per time interval (time intervals are
 //discrete sequential steps in time), and the maximum allowed size for runway queues
 
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Random;
 
