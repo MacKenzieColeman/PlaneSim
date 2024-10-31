@@ -107,7 +107,7 @@ public class Project3 {
           runway.newLeave(runway.Takeoff.peek());
         }
       }
-  
+
 
       //Runs the Update() method for every plane in the program.
       //This is what counts their individual statistics.
