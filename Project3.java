@@ -59,7 +59,7 @@ public class Project3 {
         }
       }
 
-      System.out.println("\nInsert Number of Planes Departing per Time Interval: ");
+      System.out.println("\nInsert Number of Planes Arriving or Departing per Time Interval: ");
       while(true) {
         if(scan.hasNextInt()) {
           numDeparting = scan.nextInt();
@@ -98,12 +98,16 @@ public class Project3 {
 
     while(currentTime <= maxTime){
       //If planes in air, and queue isnt full, land one
-      if(runway.Landing.peek() != null && runway.Takeoff.size() < runwaySize){
-        runway.newTakeoff();
+      for(int i = 0; i < numDeparting; i++)
+      {
+        if(runway.Landing.peek() != null && runway.Takeoff.size() < runwaySize){
+          runway.newTakeoff();
+        }
+        else if(runway.Takeoff.size() > 0){ //Otherwise, take one off
+          runway.newLeave(runway.Takeoff.peek());
+        }
       }
-      else if(runway.Takeoff.size() > 0){ //Otherwise, take one off
-        runway.newLeave(runway.Takeoff.peek());
-      }
+  
 
       //Runs the Update() method for every plane in the program.
       //This is what counts their individual statistics.
