@@ -139,5 +139,6 @@ public class Project3 {
     System.out.println("\t Planes Departed: " + runway.getDeparted()); //Planes that left the runway, and departed
     System.out.println("\t Planes Turned Away: " + runway.getRefused()); //Number of planes turned away because of a full airport
     System.out.println("Average wait time on GROUND: " + runway.getWaitTime()); //Average wait time on airport
+    scan.close();
   }
 }
