@@ -35,6 +35,7 @@ public class Runway {
     public void newTakeoff(){ //New plane to the airport
         if(Takeoff.size() < maxQueueSize && Landing.size() > 0) {
           Takeoff.add(Landing.peek()); //should remove the plane from landing, and immediately add it to takeoff
+          System.out.println("Plane "+Landing.peek().flightNumber+" has landed!");
           Landing.remove();
           numProcessed++;
         }
