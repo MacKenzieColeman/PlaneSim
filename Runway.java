@@ -35,14 +35,14 @@ public class Runway {
           numProcessed++;
         }
         else {
-          System.out.println("Full Airport!");
+          System.out.println("\u001B[31mFull Airport!");
           numRefused++;
         }
     }
 
     public void newLeave(Plane plane){
         if(Takeoff.size() > 0){
-            System.out.println("Plane: "+plane.getNumber()+" has departed!");
+            System.out.println("\u001B[33mPlane: "+plane.getNumber()+" has departed!");
             Takeoff.remove();
             avgWait = avgWait + plane.groundWaitTime;
             numDeparted++;
