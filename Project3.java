@@ -34,6 +34,7 @@ public class Project3 {
       numPlanes = randy.nextInt(8)+1; //Random amount of planes between 1 and 8
       numDeparting = randy.nextInt(3)+1; //Random amount of departing planes between 1 and 3
       runwaySize = randy.nextInt(5)+1; //Random size of runway between 1 and 5
+      runway.changeSize(runwaySize);
     }
     else{
       System.out.println("\u001B[35mInsert Number of Time Intervals: ");
@@ -73,6 +74,7 @@ public class Project3 {
       while(true) {
         if(scan.hasNextInt()) {
           runwaySize = scan.nextInt();
+          runway.changeSize(runwaySize);
           break;
         } else {
           System.out.println("Please insert a number.");
