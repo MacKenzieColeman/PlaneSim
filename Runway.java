@@ -24,11 +24,15 @@ public class Runway {
         maxQueueSize = size;
     }
 
-    public void newLanding(Plane plane){
+    public void changeSize(int newSize){
+        maxQueueSize = newSize;
+    }
+
+    public void newLanding(Plane plane){ //New plane in the air
         Landing.add(plane); //adds new plane to those waiting to land!
     }
 
-    public void newTakeoff(){
+    public void newTakeoff(){ //New plane to the airport
         if(Takeoff.size() < maxQueueSize && Landing.size() > 0) {
           Takeoff.add(Landing.peek()); //should remove the plane from landing, and immediately add it to takeoff
           Landing.remove();
