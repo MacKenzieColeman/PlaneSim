@@ -35,6 +35,7 @@ public class Runway {
     public void newTakeoff(){ //New plane to the airport
         if(Takeoff.size() < maxQueueSize && Landing.size() > 0) {
           Takeoff.add(Landing.peek()); //should remove the plane from landing, and immediately add it to takeoff
+          System.out.println("Plane "+Landing.peek().flightNumber+" has landed!");
           Landing.remove();
           numProcessed++;
         }
@@ -46,7 +47,7 @@ public class Runway {
 
     public void newLeave(Plane plane){
         if(Takeoff.size() > 0){
-            System.out.println("\u001B[33mPlane: "+plane.getNumber()+" has departed!");
+            System.out.println("Plane "+plane.getNumber()+" has departed!");
             Takeoff.remove();
             avgWait = avgWait + plane.groundWaitTime;
             numDeparted++;
