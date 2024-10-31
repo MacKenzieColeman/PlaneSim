@@ -14,7 +14,7 @@ public class Runway {
     public int maxQueueSize;
     public int numProcessed;
     public int numRefused;
-    public int avgWait;
+    public int totalWait;
     public int numDeparted;
 
     Queue<Plane> Landing = new LinkedList<>(); //planes waiting to land
@@ -35,8 +35,10 @@ public class Runway {
     public void newTakeoff(){ //New plane to the airport
         if(Takeoff.size() < maxQueueSize && Landing.size() > 0) {
           Takeoff.add(Landing.peek()); //should remove the plane from landing, and immediately add it to takeoff
+          Plane landingPlane = Landing.peek();
           System.out.println("Plane "+Landing.peek().flightNumber+" has landed!");
           Landing.remove();
+          landingPlane.arriving = false;
           numProcessed++;
         }
         else {
@@ -49,7 +51,7 @@ public class Runway {
         if(Takeoff.size() > 0){
             System.out.println("Plane "+plane.getNumber()+" has departed!");
             Takeoff.remove();
-            avgWait = avgWait + plane.groundWaitTime;
+            totalWait += plane.groundWaitTime;
             numDeparted++;
         }
     }
@@ -66,7 +68,8 @@ public class Runway {
         return numRefused;
     }
 
-    public int getWaitTime(){
-        return avgWait;
+    public double getWaitTime(){
+        if(numDeparted == 0) return 0;
+        else return (double) totalWait / numDeparted;
     }
 }
