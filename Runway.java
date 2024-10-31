@@ -47,7 +47,7 @@ public class Runway {
 
     public void newLeave(Plane plane){
         if(Takeoff.size() > 0){
-            System.out.println("Plane: "+plane.getNumber()+" has departed!");
+            System.out.println("Plane "+plane.getNumber()+" has departed!");
             Takeoff.remove();
             avgWait = avgWait + plane.groundWaitTime;
             numDeparted++;
